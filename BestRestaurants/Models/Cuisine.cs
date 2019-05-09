@@ -19,6 +19,25 @@ namespace BestRestaurants.Models
       public string Name{ get => _name; set => _name = value; }
       public string Description{ get => _description; set => _description = value; }
 
+      public static void ClearAll()
+      {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"DELETE FROM cuisines;";
+        cmd.ExecuteNonQuery();
+        conn.Close();
+        if (conn != null)
+        {
+          conn.Dispose();
+        }
+      }
+
+      public static List<Cuisine> GetAll()
+      {
+
+      }
+
       // public override bool Equals(System.Object otherCuisine)
       // {
       //     if (!(otherCuisine is Cuisine))
@@ -33,6 +52,11 @@ namespace BestRestaurants.Models
       //         return (idEquality && nameEquality);
       //     }
       // }
+
+      public void Save()
+      {
+
+      }
 
       // public override int GetHashCode()
       // {

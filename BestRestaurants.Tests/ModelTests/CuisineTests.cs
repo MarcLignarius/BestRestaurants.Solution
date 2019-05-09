@@ -6,8 +6,18 @@ using BestRestaurants.Models;
 namespace BestRestaurants.Tests
 {
   [TestClass]
-  public class CuisineTests
+  public class CuisineTests: IDisposable
   {
+    public void Dispose()
+    {
+      Cuisine.ClearAll();
+    }
+
+    public void CuisineTest()
+    {
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=best_restaurants_test;";
+    }
+
     [TestMethod]
     public void CuisineConstructor_CreatesInstanceOfCuisine_Cuisine()
     {
@@ -71,8 +81,24 @@ namespace BestRestaurants.Tests
       Assert.AreEqual(result, "Southern eatin'");
     }
 
+    [TestMethod]
+    public void GetAll_ReturnsEmptyListFromDatabase_CuisineList()
+    {
+      //Arrange
+      Cuisine newCuisine = new Cuisine("thai", "spicy SE Asian");
+      List<Cuisine> newList = new List<Cuisine> { };
+
+      //Act
+      List<Cuisine> result = newCuisine.GetAll();
+
+      //Assert
+      CollectionAssert.AreEqual(newList, result);
+    }
+
+
+
   }
 
-  
+
 
 }
