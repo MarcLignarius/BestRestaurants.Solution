@@ -83,7 +83,25 @@ namespace BestRestaurants.Models
 
       public void Save()
       {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"INSERT INTO cuisines (name, description) VALUES (@CuisineName, @CuisineDescription);";
+        MySqlParameter name = new MySqlParameter();
+        name.ParameterName = "@CuisineName";
+        name.Value = this._name;
+        cmd.Parameters.Add(name);
+        MySqlParameter description = new MySqlParameter();
+        description.ParameterName = "@CuisineDescription";
+        description.Value = this._description;
+        cmd.Parameters.Add(description);
+        cmd.ExecuteNonQuery();
 
+         conn.Close();
+         if (conn != null)
+         {
+           conn.Dispose();
+         }
       }
 
 

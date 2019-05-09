@@ -109,12 +109,12 @@ namespace BestRestaurants.Tests
     public void Save_SavesToDatabase_CuisineList()
     {
       //Arrange
-      Item testItem = new Item("Mow the lawn");
+      Cuisine testCuisine = new Cuisine("thai", "spicy SE Asian");
 
       //Act
-      testItem.Save();
-      List<Item> result = Item.GetAll();
-      List<Item> testList = new List<Item>{testItem};
+      testCuisine.Save();
+      List<Cuisine> result = Cuisine.GetAll();
+      List<Cuisine> testList = new List<Cuisine>{testCuisine};
 
       //Assert
       CollectionAssert.AreEqual(testList, result);
