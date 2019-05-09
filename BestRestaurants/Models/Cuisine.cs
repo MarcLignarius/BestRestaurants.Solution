@@ -7,15 +7,17 @@ namespace BestRestaurants.Models
 
     public class Cuisine
     {
+      private int _id;
       private string _name;
       private string _description;
 
-      public Cuisine(string name, string description)
+      public Cuisine(string name, string description, int id = 0)
       {
         _name = name;
         _description = description;
       }
 
+      public int Id{ get => _id; }
       public string Name{ get => _name; set => _name = value; }
       public string Description{ get => _description; set => _description = value; }
 
@@ -47,7 +49,7 @@ namespace BestRestaurants.Models
           string cuisineName = rdr.GetString(1);
           string cuisineDescription = rdr.GetString(2);
           // Line below now only provides one argument!
-          Cuisine newCuisine = new Cuisine(cuisineName, cuisineDescription);
+          Cuisine newCuisine = new Cuisine(cuisineName, cuisineDescription, cuisineId);
           allCuisines.Add(newCuisine);
         }
         conn.Close();
@@ -58,30 +60,31 @@ namespace BestRestaurants.Models
         return allCuisines;
       }
 
-      // public override bool Equals(System.Object otherCuisine)
+      public override bool Equals(System.Object otherCuisine)
+      {
+          if (!(otherCuisine is Cuisine))
+          {
+              return false;
+          }
+          else
+          {
+              Cuisine newCuisine = (Cuisine) otherCuisine;
+              bool idEquality = this.Id.Equals(newCuisine.Id);
+              bool nameEquality = this.Name.Equals(newCuisine.Name);
+              bool descriptionEquality = this.Description.Equals(newCuisine.Description);
+              return (idEquality && nameEquality && descriptionEquality);
+          }
+      }
+
+      // public override int GetHashCode()
       // {
-      //     if (!(otherCuisine is Cuisine))
-      //     {
-      //         return false;
-      //     }
-      //     else
-      //     {
-      //         Cuisine newCuisine = (Cuisine) otherCuisine;
-      //         bool idEquality = this.GetId().Equals(newCuisine.GetId());
-      //         bool nameEquality = this.GetName().Equals(newCuisine.GetName());
-      //         return (idEquality && nameEquality);
-      //     }
+      //     return this.Id.GetHashCode();
       // }
 
       public void Save()
       {
 
       }
-
-      // public override int GetHashCode()
-      // {
-      //     return this.GetId().GetHashCode();
-      // }
 
 
     }
