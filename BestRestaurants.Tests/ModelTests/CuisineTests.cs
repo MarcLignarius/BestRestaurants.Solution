@@ -95,6 +95,23 @@ namespace BestRestaurants.Tests
     }
 
     [TestMethod]
+    public void GetAll_ReturnsListFromDatabase_CuisineList()
+    {
+      //Arrange
+      Cuisine newCuisine1 = new Cuisine("thai", "spicy SE Asian");
+      newCuisine1.Save();
+      Cuisine newCuisine2 = new Cuisine("bbq", "southern eatin'");
+      newCuisine2.Save();
+      List<Cuisine> newList = new List<Cuisine> { newCuisine1, newCuisine2 };
+
+      //Act
+      List<Cuisine> result = Cuisine.GetAll();
+
+      //Assert
+      CollectionAssert.AreEqual(newList, result);
+    }
+
+    [TestMethod]
     public void Equals_ReturnsTrueIfNamesAndDescriptionsAreTheSame_Cuisine()
     {
       // Arrange, Act
