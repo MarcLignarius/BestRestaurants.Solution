@@ -16,6 +16,30 @@ namespace BestRestaurants.Models
         _description = description;
       }
 
+      public string Name{ get => _name; set => _name = value; }
+      public string Description{ get => _description; set => _description = value; }
+
+      // public override bool Equals(System.Object otherCuisine)
+      // {
+      //     if (!(otherCuisine is Cuisine))
+      //     {
+      //         return false;
+      //     }
+      //     else
+      //     {
+      //         Cuisine newCuisine = (Cuisine) otherCuisine;
+      //         bool idEquality = this.GetId().Equals(newCuisine.GetId());
+      //         bool nameEquality = this.GetName().Equals(newCuisine.GetName());
+      //         return (idEquality && nameEquality);
+      //     }
+      // }
+
+      // public override int GetHashCode()
+      // {
+      //     return this.GetId().GetHashCode();
+      // }
+
+
     }
 
 }
