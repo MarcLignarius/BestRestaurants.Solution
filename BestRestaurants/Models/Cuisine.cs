@@ -35,7 +35,27 @@ namespace BestRestaurants.Models
 
       public static List<Cuisine> GetAll()
       {
-
+        List<Cuisine> allCuisines = new List<Cuisine> { };
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"SELECT * FROM cuisines;";
+        MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+        while(rdr.Read())
+        {
+          int cuisineId = rdr.GetInt32(0);
+          string cuisineName = rdr.GetString(1);
+          string cuisineDescription = rdr.GetString(2);
+          // Line below now only provides one argument!
+          Cuisine newCuisine = new Cuisine(cuisineName, cuisineDescription);
+          allCuisines.Add(newCuisine);
+        }
+        conn.Close();
+        if (conn != null)
+        {
+          conn.Dispose();
+        }
+        return allCuisines;
       }
 
       // public override bool Equals(System.Object otherCuisine)

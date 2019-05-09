@@ -85,11 +85,10 @@ namespace BestRestaurants.Tests
     public void GetAll_ReturnsEmptyListFromDatabase_CuisineList()
     {
       //Arrange
-      Cuisine newCuisine = new Cuisine("thai", "spicy SE Asian");
       List<Cuisine> newList = new List<Cuisine> { };
 
       //Act
-      List<Cuisine> result = newCuisine.GetAll();
+      List<Cuisine> result = Cuisine.GetAll();
 
       //Assert
       CollectionAssert.AreEqual(newList, result);
