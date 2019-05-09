@@ -105,6 +105,35 @@ namespace BestRestaurants.Models
          }
       }
 
+       public static Cuisine Find(int id)
+      {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"SELECT * FROM `cuisines` WHERE id = @thisId;";
+        MySqlParameter thisId = new MySqlParameter();
+        thisId.ParameterName = "@thisId";
+        thisId.Value = id;
+        cmd.Parameters.Add(thisId);
+        var rdr = cmd.ExecuteReader() as MySqlDataReader;
+        int cuisineId = 0;
+        string cuisineName = "";
+        string cuisineDescription = "";
+        while (rdr.Read())
+        {
+           cuisineId = rdr.GetInt32(0);
+           cuisineName = rdr.GetString(1);
+           cuisineDescription = rdr.GetString(2);
+        }
+        Cuisine foundCuisine= new Cuisine(cuisineName, cuisineDescription, cuisineId);  // This line is new!
+         conn.Close();
+         if (conn != null)
+         {
+           conn.Dispose();
+         }
+        return foundCuisine;
+      }
+
 
     }
 

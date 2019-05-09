@@ -137,6 +137,21 @@ namespace BestRestaurants.Tests
       CollectionAssert.AreEqual(testList, result);
     }
 
+    [TestMethod]
+    public void Find_ReturnsCorrectItem_Item()
+    {
+      //Arrange
+      Cuisine newCuisine1 = new Cuisine("thai", "spicy SE Asian");
+      newCuisine1.Save();
+      Cuisine newCuisine2 = new Cuisine("bbq", "southern eatin'");
+      newCuisine2.Save();
+
+      //Act
+      Cuisine result = Cuisine.Find(newCuisine2.Id);
+
+      //Assert
+      Assert.AreEqual(newCuisine2, result);
+    }
 
   }
 
