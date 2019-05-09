@@ -7,6 +7,11 @@ namespace BestRestaurants.Controllers
 
     public class RestaurantsController : Controller
     {
-
+        [HttpGet("/cuisines/{cuisineId}/restaurants/new")]
+        public ActionResult New(int cuisineId)
+        {
+            Cuisine cuisine = Cuisine.Find(cuisineId);
+            return View(cuisine);
+        }
     }
 }

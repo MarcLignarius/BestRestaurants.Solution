@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>Best Restaurants</title>
+  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='~/css/styles.css' type="text/css">
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Best Restaurants</h1>
+      <em>You can add a new great <strong>@Model.Name</strong> restaurant here.</em>
+    </div>
+    <div id="background">
+      <form action='/cuisines/@Model.Id/restaurants' method='post'>
+        <input id='cuisineId' name='cuisineId' type='hidden' value='@Model.Id'>
+        <label for='restaurantName'>Restaurant Name:</label><br>
+        <input id='restaurantName' name='restaurantName' type='text' required><br>
+        <br>
+        <label for='restaurantDescription'>Enter a description:</label><br>
+        <textarea rows="5" cols="80" id='restaurantDescription' name='restaurantDescription' autofocus="autofocus" required>
+        </textarea><br>
+        <br>
+        <button type='submit' class="btn btn-dark">Add restaurant</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

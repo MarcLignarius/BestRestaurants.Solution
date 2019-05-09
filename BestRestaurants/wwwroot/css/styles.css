@@ -35,6 +35,12 @@ h3 {
   margin-bottom: 10px;
 }
 
+#background {
+  background: rgba(61, 58, 57, 0.85);
+  padding: 20px;
+  border-radius: .3rem;
+}
+
 .list {
   margin-left: 10%;
   margin-right: 10%;

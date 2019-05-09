@@ -12,9 +12,9 @@ namespace BestRestaurants.Models
 
         public Cuisine(string name, string description, int id = 0)
         {
+            _id = id;
             _name = name;
             _description = description;
-            _id = id;
         }
 
         public int Id{ get => _id; }
@@ -33,6 +33,35 @@ namespace BestRestaurants.Models
             {
                 conn.Dispose();
             }
+        }
+
+        public List<Restaurant> GetRestaurants()
+        {
+          List<Restaurant> allCuisineRestaurants = new List<Restaurant> {};
+          MySqlConnection conn = DB.Connection();
+          conn.Open();
+          var cmd = conn.CreateCommand() as MySqlCommand;
+          cmd.CommandText = @"SELECT * FROM restaurants WHERE cuisine_id = @cuisine_id;";
+          MySqlParameter cuisineId = new MySqlParameter();
+          cuisineId.ParameterName = "@cuisine_id";
+          cuisineId.Value = this._id;
+          cmd.Parameters.Add(cuisineId);
+          var rdr = cmd.ExecuteReader() as MySqlDataReader;
+          while(rdr.Read())
+          {
+              int restaurantId = rdr.GetInt32(0);
+              string restaurantName = rdr.GetString(1);
+              string restaurantDescription = rdr.GetString(2);
+              int restaurantCuisineId = rdr.GetInt32(3);
+              Restaurant newRestaurant = new Restaurant(restaurantName, restaurantDescription, restaurantCuisineId, restaurantId);
+              allCuisineRestaurants.Add(newRestaurant);
+          }
+          conn.Close();
+          if (conn != null)
+          {
+              conn.Dispose();
+          }
+          return allCuisineRestaurants;
         }
 
         public static List<Cuisine> GetAll()
