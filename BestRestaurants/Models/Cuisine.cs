@@ -15,6 +15,7 @@ namespace BestRestaurants.Models
       {
         _name = name;
         _description = description;
+        _id = id;
       }
 
       public int Id{ get => _id; }
@@ -48,7 +49,6 @@ namespace BestRestaurants.Models
           int cuisineId = rdr.GetInt32(0);
           string cuisineName = rdr.GetString(1);
           string cuisineDescription = rdr.GetString(2);
-          // Line below now only provides one argument!
           Cuisine newCuisine = new Cuisine(cuisineName, cuisineDescription, cuisineId);
           allCuisines.Add(newCuisine);
         }
@@ -96,6 +96,7 @@ namespace BestRestaurants.Models
         description.Value = this._description;
         cmd.Parameters.Add(description);
         cmd.ExecuteNonQuery();
+        _id = (int) cmd.LastInsertedId;
 
          conn.Close();
          if (conn != null)
