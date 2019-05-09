@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>Best Restaurants</title>
+  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='~/css/styles.css' type="text/css">
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Best Restaurants</h1>
+      <em>Click on a regional cuisine to see favorite restaurants:</em>
+    </div>
+    @if (Model.Count == 0)
+    {
+      <p>No types of cuisine have been added yet!</p>
+    }
+    @if(Model.Count != 0)
+    {
+      @foreach (var cuisine in Model)
+      {
+        <div class="list">
+          <div class="card col-md-12">
+            <div class="card-body">
+              <h5 class="card-title"><a href="/cuisines/@cuisine.Id" class="btn btn-dark">@cuisine.Name</a></h5>
+              <div class="card-text">
+                <p><em>@cuisine.Description</em></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+      }
+    }
+  </div>
+</body>
+</html>

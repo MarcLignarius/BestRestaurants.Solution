@@ -5,11 +5,13 @@ using BestRestaurants.Models;
 
 namespace BestRestaurants.Controllers
 {
-
     public class CuisinesController : Controller
     {
-
-
+        [HttpGet("/cuisines")]
+        public ActionResult Index()
+        {
+            List<Cuisine> allCuisines = Cuisine.GetAll();
+            return View(allCuisines);
+        }
     }
-
 }

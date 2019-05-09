@@ -1,15 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace ToDoList.Controllers
+namespace BestRestaurants.Controllers
 {
     public class HomeController : Controller
     {
-
         [HttpGet("/")]
         public ActionResult Index()
         {
             return View();
         }
-
     }
 }
